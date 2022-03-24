@@ -1,7 +1,7 @@
 function Header(){
     return (
     <div className="Header">
-        <p >This is a header.</p>
+        <p >Header here.</p>
     </div>
     )
 }
