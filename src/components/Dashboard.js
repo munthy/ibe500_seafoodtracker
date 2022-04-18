@@ -83,8 +83,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme({
   palette: {
+    mode:'dark',
     primary: {
-      main: '#55add6',
+      main: '#bf1900',
     },
     secondary: {
       main: '#196585',
@@ -96,7 +97,7 @@ const mdTheme = createTheme({
 });
 
 function DashboardContent() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -130,7 +131,7 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Seafood Tracker
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -155,7 +156,6 @@ function DashboardContent() {
           <Divider />
           <List component="nav">
             {mainListItems}
-            <Divider sx={{ my: 1 }} />
           </List>
         </Drawer>
         <Box
