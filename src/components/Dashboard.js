@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import React from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+
 
 
 import MakeTransaction from './MakeTransaction';
+import ShowChain from './ShowChain'
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://github.com/munthy/ibe500_seafoodtracker">
         Viktor & Magnus
       </Link>{' '}
       {new Date().getFullYear()}
@@ -56,12 +59,15 @@ function DashboardContent() {
             overflow: 'auto',
           }}
         >
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Box sx={{ width: '100%', typography: 'body1' }}>
-              <MakeTransaction />
-            </Box>
+            <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center" sx={{outline:"solid"}}>
+                <Grid item xs={6}>
+                <MakeTransaction />
+                </Grid>
+                <Grid item xs={6}>
+                  <ShowChain />
+                </Grid>
+              </Grid>
             <Copyright sx={{ pt: 4 }} />
-          </Container>
         </Box>
       </Box>
     </ThemeProvider>
