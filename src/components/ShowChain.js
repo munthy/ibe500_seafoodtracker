@@ -13,6 +13,7 @@ export default function ShowChain() {
 
   const [LotId, setLotId] = useState('')
   const [data, setData] = useState({});
+  const [dataReceived, setDataReceived] = useState(false);
 
   const handleLotIdChange = (event) => {
     setLotId(event.target.value);
@@ -20,8 +21,9 @@ export default function ShowChain() {
 
   const getChain = async () => {    
     await getLotContent(LotId).then( (response) => {
-      setData(response)
-      console.info(response)
+      setData(response);
+      setDataReceived(true);
+      console.info(response.txIds)
     })
   }
 
@@ -34,7 +36,7 @@ export default function ShowChain() {
           <Button onClick={getChain} variant="contained" sx={{p:2,marginLeft:1}}>Get lot info</Button>
         </Grid>
         <Grid item>
-          <Datatable props={data}/>
+          {dataReceived ? <Datatable props={data}/> : "No data."}
         </Grid>
       </Grid>
     </Box>
