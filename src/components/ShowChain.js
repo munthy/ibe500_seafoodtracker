@@ -28,7 +28,7 @@ export default function ShowChain() {
   }
 
   return (
-    <Box sx={{backgroundColor: "#252525",borderRadius:"20px", boxShadow:"0px 0px 10px #151515",margin:"50px", p: 2, width:"50%"}}>
+    <Box sx={{backgroundColor: "#252525",borderRadius:"15px", boxShadow:"0px 0px 10px #151515",margin:"5px", p: 2, width:"50%"}}>
       <Title>Lot History</Title>
       <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
         <Grid item>
