@@ -1,4 +1,4 @@
-async function _sendTx(dataObject){
+export async function sendTx(dataObject){
     const apiURL = "http://vargrym.ddns.net:4500/broadcasttransaction";
 
     const response = await fetch(apiURL, {
@@ -12,7 +12,7 @@ async function _sendTx(dataObject){
     return response.json();
 }
 
-async function _getLotContent(lotIdAsString){
+export async function getLotContent(lotIdAsString){
     const apiURL = `http://vargrym.ddns.net:4500/lotsummary/${lotIdAsString}`;
     
     const response = await fetch(apiURL, {
@@ -20,6 +20,3 @@ async function _getLotContent(lotIdAsString){
     })
     return response.json();
 }
-
-exports.sendTx = _sendTx;
-exports.getLotContent = _getLotContent;
