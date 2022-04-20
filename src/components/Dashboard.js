@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-
-
+import Tab from '@mui/material/Tab';
+import Grid from '@mui/material/Grid'
+import {TabContext, TabList, TabPanel} from '@mui/lab';
 
 import MakeTransaction from './MakeTransaction';
 import ShowChain from './ShowChain'
@@ -15,7 +14,6 @@ import ShowChain from './ShowChain'
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
       <Link color="inherit" href="https://github.com/munthy/ibe500_seafoodtracker">
         Viktor & Magnus
       </Link>{' '}
@@ -29,10 +27,10 @@ const mdTheme = createTheme({
   palette: {
     mode:'dark',
     primary: {
-      main: '#29abe3',
+      main: '#4d7ea1',
     },
     secondary: {
-      main: '#196585',
+      main: '#3b607a',
     },
     error: {
       main: '#851919',
@@ -41,11 +39,15 @@ const mdTheme = createTheme({
 });
 
 function DashboardContent() {
+  const [tabValue, setTabValue] = useState("1")
 
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
 
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex'}}>
         <CssBaseline />   
         <Box
           component="main"
@@ -59,14 +61,16 @@ function DashboardContent() {
             overflow: 'auto',
           }}
         >
-            <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center" sx={{outline:"solid"}}>
-                <Grid item xs={6}>
-                <MakeTransaction />
-                </Grid>
-                <Grid item xs={6}>
-                  <ShowChain />
-                </Grid>
-              </Grid>
+          <TabContext value={tabValue}>
+            <Box container sx={{borderBottom:1,borderColor:"divider"}}>
+              <TabList onChange={handleTabChange} centered>
+                <Tab label="Create Transaction" value="1" />
+                <Tab label="View Lot History" value="2" />
+              </TabList>
+            </Box>
+            <TabPanel value="1"><Grid container alignItems="center" justifyContent="center"><MakeTransaction /></Grid></TabPanel>
+            <TabPanel value="2"><Grid container alignItems="center" justifyContent="center"><ShowChain /></Grid></TabPanel>
+          </TabContext>
             <Copyright sx={{ pt: 4 }} />
         </Box>
       </Box>
