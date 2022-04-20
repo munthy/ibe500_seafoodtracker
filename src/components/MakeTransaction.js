@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { TextField, FormControl,Grid,Typography, MenuItem,Paper, Button, Box} from '@mui/material';
+import {sendTx} from "../libraries/ibe500sitefunctions.js";
 
 
 export default function MakeTransaction(){
@@ -16,7 +17,11 @@ export default function MakeTransaction(){
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  const submitTransaction = () => {
+  const submitTransaction = async () => {    
+    let demoObject = {
+      demo:"object"
+    }
+    await sendTx(demoObject);
     console.info("Transaction submitted")
   }
 
