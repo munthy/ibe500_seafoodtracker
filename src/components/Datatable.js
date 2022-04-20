@@ -4,6 +4,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Link from '@mui/material/Link';
 
 
 
@@ -15,6 +16,7 @@ export default function Datatable(props) {
         <TableHead>
           <TableRow>
             <TableCell>LotId</TableCell>
+            
             <TableCell>txType</TableCell>
             <TableCell>Seller</TableCell>
             <TableCell>Buyer</TableCell>
