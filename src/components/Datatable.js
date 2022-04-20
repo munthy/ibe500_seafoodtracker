@@ -9,32 +9,61 @@ import Link from '@mui/material/Link';
 
 
 export default function Datatable(props) {
-  //rows = props;
+  //WIP
+  let rows = [];
+  if (props !== null) {
+    const data = props;
+    let txIds = data.props.txIds;
+    let analysis = data.props.analysis;
+    console.log(analysis)
+   
+    rows = [{
+      id: 0,
+      link: "-",
+      lotId:"-",
+      txType: "-",
+      seller: "-",
+      buyer: "-",
+      product: "-",
+      quantity: "-"
+    }]
+  } else {
+    rows = [{
+      id: 0,
+      link: "-",
+      lotId:"-",
+      txType: "-",
+      seller: "-",
+      buyer: "-",
+      product: "-",
+      quantity: "-"
+    }]
+  }
+
   return (
     <>
       <Table size="large">
         <TableHead>
           <TableRow>
             <TableCell>LotId</TableCell>
-            
             <TableCell>txType</TableCell>
             <TableCell>Seller</TableCell>
             <TableCell>Buyer</TableCell>
             <TableCell>Product</TableCell>
-            <TableCell align="right">Amount</TableCell>
+            <TableCell>Quantity</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {rows.map((row) => (
+          {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
+              <TableCell>{row.lotId}</TableCell>
+              <TableCell>{row.txType}</TableCell>
+              <TableCell>{row.seller}</TableCell>
+              <TableCell>{row.buyer}</TableCell>
+              <TableCell>{row.product}</TableCell>
+              <TableCell>{row.quantity}</TableCell>
             </TableRow>
-          ))} */}
+          ))}
         </TableBody>
       </Table>
     </>

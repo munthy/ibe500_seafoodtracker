@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { TextField, FormControl, Grid,Typography, MenuItem, Paper, Button, Box, CircularProgress, Link} from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SendIcon from '@mui/icons-material/Send';
 import {sendTx} from "../libraries/ibe500sitefunctions.js";
 import Title from './Title';
 
@@ -29,16 +31,15 @@ export default function MakeTransaction(){
        setTxComplete(true);
        setTxHash(response);
        console.info("Transaction sent.")
-       console.log(values)
      })
   }
 
   return (
-    <Box sx={{backgroundColor: "#252525",borderRadius:"20px", boxShadow:"0px 0px 10px #151515",margin:"50px", p: 2, width:"50%"}}>
+    <Box sx={{backgroundColor: "#252525",borderRadius:"15px", boxShadow:"0px 0px 10px #151515",margin:"5px", p: 2, width:"60%"}}>
       <Title>Create Transaction</Title>
       <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
-        <Grid item xs={6}>
-        <FormControl required sx={{'& .MuiTextField-root': { m: 1, width: '25ch' }}}>
+        <Grid item xs={4}>
+        <FormControl required sx={{'& .MuiTextField-root': {m: 1, width:"17vw"}}}>
           <TextField id="txType_input" label="txType" select value={values.txType} onChange={handleChange('txType')} variant="filled">
             <MenuItem value="catch">Catch</MenuItem>
             <MenuItem value="sale">Sale</MenuItem>
@@ -51,31 +52,35 @@ export default function MakeTransaction(){
           <TextField id="quantity_input" label="Quantity kg" type="number" value={values.quantity} onChange={handleChange('quantity')} variant="filled"></TextField>
         </FormControl>
         </Grid>
-        <Grid item xs={6}>
-          <Grid container spacing={2} direction="column" justifyContent="center" alignItems="center" sx={{p: 2, }}>
+        <Grid item xs={8}>
+          <Grid container spacing={2} direction="column" alignContent="stretch"  sx={{p: 2, }}>
             <Grid item xs>
               <Typography sx={{marginLeft:"5px", marginBottom: "5px", fontSize:"large"}}>
-                    Trx preview
+                    Trx data preview
               </Typography>
               <Paper elevation={5} sx={{
                         p: 2,
                         display: 'flex',
                         flexDirection: 'column',
-                        width: 300,
+                        width: "100%",
                         overflow:"auto"
                       }}>
-              
                   <Typography sx={{fontFamily:"Courier New",whiteSpace: "pre"}}>
                     {`{\n txType: "${values.txType}", \n lotId: "${values.lotId}", \n seller: "${values.seller}", \n buyer: "${values.buyer}", \n product: "${values.product}", \n quantity: "${values.quantity}" \n}`}
                   </Typography>
               </Paper>
             </Grid>
-              <Grid item xs>
-                <Button variant="contained" onClick={submitTransaction} sx={{width:'25ch'}} >{loading ? <CircularProgress size="1.5rem" /> : "Submit"}</Button>
+              <Grid item xs={3}>
+                <LoadingButton variant="contained" loading={loading} onClick={submitTransaction} endIcon={<SendIcon />} loadingPosition="end" sx={{width:'25ch'}} >Submit</LoadingButton>
               </Grid>
-              <Grid item xs>
-                {txComplete ? <Link href={"https://test.whatsonchain.com/tx/"+txHash}>Link to transaction on WoC</Link> : "-"}
-              </Grid>
+              <Grid item xs={3}>
+                <Typography sx={{marginLeft:"5px", marginBottom: "5px", fontSize:"large"}}>
+                  WoC Transaction Link
+                </Typography>
+                <Paper elevation={5} sx={{p:2, width:"100%"}}>
+                  {txComplete ? <Link href={"https://test.whatsonchain.com/tx/"+txHash} target="_blank" rel="noreferrer">{txHash}</Link> : "-"}
+                </Paper>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

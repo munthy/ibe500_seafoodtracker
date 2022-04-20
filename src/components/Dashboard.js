@@ -27,7 +27,7 @@ const mdTheme = createTheme({
   palette: {
     mode:'dark',
     primary: {
-      main: '#4d7ea1',
+      main: '#5a81ed',
     },
     secondary: {
       main: '#3b607a',
@@ -47,6 +47,11 @@ function DashboardContent() {
 
   return (
     <ThemeProvider theme={mdTheme}>
+      <Box component="header" sx={{height:"5rem"}}>
+        <Typography component="h1" sx={{fontSize:48, color:"#5a81ed", textAlign:"center" }}>
+          BSV Seafood Tracker
+        </Typography>
+      </Box>
       <Box sx={{ display: 'flex'}}>
         <CssBaseline />   
         <Box
