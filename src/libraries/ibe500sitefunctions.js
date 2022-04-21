@@ -46,8 +46,6 @@ export class DataAnalysis{
     
         function initializeCatchInfo(tx){
 			if (tx.txType !== "catch") {return;}
-			// lotSummary.product = tx.product;
-			// lotSummary.lotId = tx.lotId;
 			if (lotSummary[tx.buyer] === undefined){
 				lotSummary[tx.buyer] = {};				
 			}
