@@ -33,7 +33,7 @@ export default function MakeTransaction(){
     return (
       values.lotId.length > 0 &&
       values.txType.length > 0 && 
-      values.seller.length > 0 && 
+      (values.seller.length > 0 || (values.seller.length >= 0 && values.txType === "catch")) && 
       values.buyer.length > 0 && 
       values.product.length > 0 && 
       values.quantity.length > 0 
@@ -46,6 +46,7 @@ export default function MakeTransaction(){
   
   const submitTransaction = async () => {    
     setLoading(true);
+    if (values.txType === "catch"){values.seller = ""};
     await sendTx(values).then((response)=>{
       setLoading(false);
       setTxComplete(true);
