@@ -20,3 +20,12 @@ export async function getLotContent(lotIdAsString){
     })
     return response.json();
 }
+
+export async function getLotData(lotIdAsString){
+    const apiURL = `http://vargrym.ddns.net:4500/getlotdata/${lotIdAsString}`;
+    
+    const response = await fetch(apiURL, {
+        method: "GET",
+    })
+    return response.json();
+}

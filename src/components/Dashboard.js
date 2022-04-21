@@ -11,9 +11,10 @@ import {TabContext, TabList, TabPanel} from '@mui/lab';
 import MakeTransaction from './MakeTransaction';
 import ShowChain from './ShowChain'
 
-function Copyright(props) {
+function Credits(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'HiMolde IBE500 | '}
       <Link color="inherit" href="https://github.com/munthy/ibe500_seafoodtracker">
         Viktor & Magnus
       </Link>{' '}
@@ -76,7 +77,7 @@ function DashboardContent() {
             <TabPanel value="1"><Grid container alignItems="center" justifyContent="center"><MakeTransaction /></Grid></TabPanel>
             <TabPanel value="2"><Grid container alignItems="center" justifyContent="center"><ShowChain /></Grid></TabPanel>
           </TabContext>
-            <Copyright sx={{ pt: 4 }} />
+            <Credits sx={{ pt: 4 }} />
         </Box>
       </Box>
     </ThemeProvider>

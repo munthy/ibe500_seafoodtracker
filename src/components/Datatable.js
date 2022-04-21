@@ -6,39 +6,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Link from '@mui/material/Link';
 
-
-
 export default function Datatable(props) {
-  //WIP
-  let rows = [];
-  if (props !== null) {
-    const data = props;
-    let txIds = data.props.txIds;
-    let analysis = data.props.analysis;
-    console.log(analysis)
-   
-    rows = [{
-      id: 0,
-      link: "-",
-      lotId:"-",
-      txType: "-",
-      seller: "-",
-      buyer: "-",
-      product: "-",
-      quantity: "-"
-    }]
-  } else {
-    rows = [{
-      id: 0,
-      link: "-",
-      lotId:"-",
-      txType: "-",
-      seller: "-",
-      buyer: "-",
-      product: "-",
-      quantity: "-"
-    }]
-  }
+  const rows = props.props;
+  console.info(rows)
 
   return (
     <>
@@ -51,6 +21,7 @@ export default function Datatable(props) {
             <TableCell>Buyer</TableCell>
             <TableCell>Product</TableCell>
             <TableCell>Quantity</TableCell>
+            <TableCell>Tx whatsonchain link</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,6 +33,7 @@ export default function Datatable(props) {
               <TableCell>{row.buyer}</TableCell>
               <TableCell>{row.product}</TableCell>
               <TableCell>{row.quantity}</TableCell>
+              <TableCell><Link  href={"https://test.whatsonchain.com/tx/"+row.link} target="_blank" rel="noreferrer">{row.link.slice(0,15)+"..."}</Link></TableCell>
             </TableRow>
           ))}
         </TableBody>

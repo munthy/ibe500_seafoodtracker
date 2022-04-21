@@ -6,6 +6,7 @@ import {sendTx} from "../libraries/ibe500sitefunctions.js";
 import Title from './Title';
 
 
+
 export default function MakeTransaction(){
   
   const [loading, setLoading] = useState(false);
@@ -19,21 +20,31 @@ export default function MakeTransaction(){
     product:'',
     quantity:'',
   });
-
+  
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  function validateForms() {
+    return (
+      values.lotId.length > 0 &&
+      values.txType.length > 0 && 
+      values.seller.length > 0 && 
+      values.buyer.length > 0 && 
+      values.product.length > 0 && 
+      values.quantity.length > 0 
+    )}
+  
   const submitTransaction = async () => {    
     setLoading(true);
-     await sendTx(values).then((response)=>{
-       setLoading(false);
-       setTxComplete(true);
-       setTxHash(response);
-       console.info("Transaction sent.")
-     })
+    await sendTx(values).then((response)=>{
+      setLoading(false);
+      setTxComplete(true);
+      setTxHash(response);
+      console.info("Transaction sent.")
+    })
   }
-
+  
   return (
     <Box sx={{backgroundColor: "#252525",borderRadius:"15px", boxShadow:"0px 0px 10px #151515",margin:"5px", p: 2, width:"60%"}}>
       <Title>Create Transaction</Title>
@@ -71,7 +82,7 @@ export default function MakeTransaction(){
               </Paper>
             </Grid>
               <Grid item xs={3}>
-                <LoadingButton variant="contained" loading={loading} onClick={submitTransaction} endIcon={<SendIcon />} loadingPosition="end" sx={{width:'25ch'}} >Submit</LoadingButton>
+                <LoadingButton variant="contained" disabled={!validateForms()} loading={loading} onClick={submitTransaction} endIcon={<SendIcon />} loadingPosition="end" sx={{width:'25ch'}} >Submit</LoadingButton>
               </Grid>
               <Grid item xs={3}>
                 <Typography sx={{marginLeft:"5px", marginBottom: "5px", fontSize:"large"}}>
