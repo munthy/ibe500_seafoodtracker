@@ -8,7 +8,6 @@ import Link from '@mui/material/Link';
 
 export default function Datatable(props) {
   const rows = props.props;
-  console.info(rows)
 
   return (
     <>
@@ -21,7 +20,7 @@ export default function Datatable(props) {
             <TableCell>Buyer</TableCell>
             <TableCell>Product</TableCell>
             <TableCell>Quantity</TableCell>
-            <TableCell>Tx whatsonchain link</TableCell>
+            <TableCell>Transaction on whatsonchain</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -33,7 +32,7 @@ export default function Datatable(props) {
               <TableCell>{row.buyer}</TableCell>
               <TableCell>{row.product}</TableCell>
               <TableCell>{row.quantity}</TableCell>
-              <TableCell><Link  href={"https://test.whatsonchain.com/tx/"+row.link} target="_blank" rel="noreferrer">{row.link.slice(0,15)+"..."}</Link></TableCell>
+              <TableCell><Link  href={"https://test.whatsonchain.com/tx/"+row.link} target="_blank" rel="noreferrer">{row.link.slice(0,20)+"..."}</Link></TableCell>
             </TableRow>
           ))}
         </TableBody>

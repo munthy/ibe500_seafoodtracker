@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid'
+import PhishingIcon from '@mui/icons-material/Phishing';
 import {TabContext, TabList, TabPanel} from '@mui/lab';
 
 import MakeTransaction from './MakeTransaction';
@@ -28,10 +29,11 @@ const mdTheme = createTheme({
   palette: {
     mode:'dark',
     primary: {
-      main: '#5a81ed',
+      main: '#ffff',
     },
     secondary: {
-      main: '#3b607a',
+      main: '#1b2836',
+      light: '#293c52',
     },
     error: {
       main: '#851919',
@@ -48,11 +50,11 @@ function DashboardContent() {
 
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box component="header" sx={{height:"5rem"}}>
-        <Typography component="h1" sx={{fontSize:48, color:"#5a81ed", textAlign:"center" }}>
-          BSV Seafood Tracker
+      
+        <Typography component="h1" sx={{fontSize:48, color:"primary", textAlign:"center" ,backgroundColor:"secondary.main"}}>
+         <PhishingIcon fontSize="large" /> BSV Seafood Tracker
         </Typography>
-      </Box>
+      
       <Box sx={{ display: 'flex'}}>
         <CssBaseline />   
         <Box
@@ -61,7 +63,7 @@ function DashboardContent() {
             backgroundColor: (theme) =>
               theme.palette.mode === 'light'
                 ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+                : "secondary.main",
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',

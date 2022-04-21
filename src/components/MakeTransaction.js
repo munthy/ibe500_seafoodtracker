@@ -46,8 +46,8 @@ export default function MakeTransaction(){
   }
   
   return (
-    <Box sx={{backgroundColor: "#252525",borderRadius:"15px", boxShadow:"0px 0px 10px #151515",margin:"5px", p: 2, width:"60%"}}>
-      <Title>Create Transaction</Title>
+    <Box sx={{backgroundColor: "secondary.light",borderRadius:"15px", boxShadow: "rgba(17, 30, 44 0.2) 0px 7px 29px 0px",margin:"5px", p: 2, width:"60%"}}>
+      <Title sx={{marginLeft:2, marginTop:1.3}}>Create Transaction</Title>
       <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
         <Grid item xs={4}>
         <FormControl required sx={{'& .MuiTextField-root': {m: 1, width:"17vw"}}}>

@@ -31,7 +31,7 @@ export async function getLotData(lotIdAsString){
 }
 
 export class DataAnalysis{
-    static ReturnCompanyStatsForLotNo(txDataArray){
+    static ReturnCompanyStats(txDataArray){
         let lotSummary = {};	
         for (let txData of txDataArray){
             initializeCatchInfo(txData);
@@ -45,46 +45,46 @@ export class DataAnalysis{
         return lotSummary;
     
         function initializeCatchInfo(tx){
-			if (tx.txType != "catch") {return;}
-			lotSummary.product = tx.product;
-			lotSummary.lotId = tx.lotId;
-			if (lotSummary[tx.buyer] == undefined){
+			if (tx.txType !== "catch") {return;}
+			// lotSummary.product = tx.product;
+			// lotSummary.lotId = tx.lotId;
+			if (lotSummary[tx.buyer] === undefined){
 				lotSummary[tx.buyer] = {};				
 			}
 			lotSummary[tx.buyer].purchased = tx.quantity; //Choice made to represent catch as "buying" fish from the sea; easier to parse.            
         }
     
         function initializeBuyerInfo(tx){
-            if (tx.txType != "purchase"){return;}
-			if(lotSummary[tx.buyer] == undefined){
+            if (tx.txType !== "purchase"){return;}
+			if(lotSummary[tx.buyer] === undefined){
                 lotSummary[tx.buyer] = {};
                 lotSummary[tx.buyer].purchased = 0;
             }
         }
     
         function initializeSellerInfo(tx){
-            if (tx.txType != "sale"){return;}
-			if(lotSummary[tx.seller] == undefined){
+            if (tx.txType !== "sale"){return;}
+			if(lotSummary[tx.seller] === undefined){
                 lotSummary[tx.seller] = {};
                 lotSummary[tx.seller].sold = 0;
             }
         }
     
         function addSalesInfo(tx){
-            if (tx.txType == "purchase"){
-                if (lotSummary[tx.buyer].purchased == undefined){lotSummary[tx.buyer].purchased = 0}
+            if (tx.txType === "purchase"){
+                if (lotSummary[tx.buyer].purchased === undefined){lotSummary[tx.buyer].purchased = 0}
                 lotSummary[tx.buyer].purchased += tx.quantity;
             }            
 
-            if (tx.txType == "sale"){
-                if (lotSummary[tx.seller].sold == undefined){lotSummary[tx.seller].sold = 0}
+            if (tx.txType === "sale"){
+                if (lotSummary[tx.seller].sold === undefined){lotSummary[tx.seller].sold = 0}
                 lotSummary[tx.seller].sold += tx.quantity;
             }
         }
     
         function addSoldToInfo(tx){
-            if (tx.txType != "sale"){return;}
-            if (lotSummary[tx.seller].soldTo == undefined) {lotSummary[tx.seller].soldTo = {}};
+            if (tx.txType !== "sale"){return;}
+            if (lotSummary[tx.seller].soldTo === undefined) {lotSummary[tx.seller].soldTo = {}};
             
             lotSummary[tx.seller].soldTo[tx.buyer] = {};
             lotSummary[tx.seller].soldTo[tx.buyer] = {
@@ -94,8 +94,8 @@ export class DataAnalysis{
         }
 
         function addPurchasedFromInfo(tx){
-            if (tx.txType != "purchase"){return;}
-            if (lotSummary[tx.buyer].purchasedFrom == undefined) {lotSummary[tx.buyer].purchasedFrom = {}};
+            if (tx.txType !== "purchase"){return;}
+            if (lotSummary[tx.buyer].purchasedFrom === undefined) {lotSummary[tx.buyer].purchasedFrom = {}};
             
             lotSummary[tx.buyer].purchasedFrom[tx.seller] = {};
             lotSummary[tx.buyer].purchasedFrom[tx.seller] = {
@@ -107,7 +107,7 @@ export class DataAnalysis{
 
 	static CompareQuantity(lotSummary, seller, purchaser){
 		try{
-			if (lotSummary[seller].soldTo[purchaser].quantity == lotSummary[purchaser].purchasedFrom[seller].quantity){
+			if (lotSummary[seller].soldTo[purchaser].quantity === lotSummary[purchaser].purchasedFrom[seller].quantity){
 				return true;
 			}
 			return false;
@@ -118,8 +118,8 @@ export class DataAnalysis{
 	
 	static CompareProduct(lotSummary, seller, purchaser){
 		try{
-			if (seller == undefined || purchaser == undefined){return false;}
-			if(lotSummary[seller].soldTo[purchaser].product == lotSummary[purchaser].purchasedFrom[seller].product){
+			if (seller === undefined || purchaser === undefined){return false;}
+			if(lotSummary[seller].soldTo[purchaser].product === lotSummary[purchaser].purchasedFrom[seller].product){
 				return true;
 			}
 			return false;
