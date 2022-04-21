@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button';
+import Button from '@mui/material/Button'
+import LoadingButton from '@mui/lab/LoadingButton';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Title from './Title';
@@ -64,6 +65,7 @@ export default function ShowChain() {
       <Grid container spacing={2} direction="column"  alignItems="center" >
         <Grid item xs={2} >
           <TextField variant="outlined" label="LotId" value={LotId} onChange={handleLotIdChange}/>
+          {/* <LoadingButton variant="contained" loading={loading} onClick={getChain} endIcon={<SendIcon />} loadingPosition="end" sx={{width:'25ch'}} >Submit</LoadingButton> */}
           <Button onClick={getChain} variant="contained" sx={{p:2,marginLeft:1}}>{loading ? <CircularProgress size="1.5rem" /> : "Submit"}</Button>
         </Grid>
         <Grid item xs={10} sx={{marginBottom:"30px"}}>
