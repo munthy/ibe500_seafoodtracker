@@ -63,7 +63,6 @@ export default function ShowChain() {
       clone.companyname = key;
       outList.push(clone)
     }
-    console.info(outList)
     setAnalysis(outList)
   }
 

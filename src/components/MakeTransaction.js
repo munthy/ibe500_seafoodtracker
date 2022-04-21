@@ -1,31 +1,35 @@
 import React, {useState} from 'react';
 import { TextField, FormControl, Grid,Typography, MenuItem, Paper, Box, Link} from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
+import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {sendTx} from "../libraries/ibe500sitefunctions.js";
 import Title from './Title';
 
 
 
 export default function MakeTransaction(){
-  
-  const [loading, setLoading] = useState(false);
-  const [txHash, setTxHash] = useState("");
-  const [txComplete, setTxComplete] = useState(false)
-  const [values, setValues] = useState({
+
+  let defaultValues = {
     lotId:'',
     txType:'',
     seller:'',
     buyer:'',
     product:'',
     quantity:'',
-  });
+  }
+
+  const [loading, setLoading] = useState(false);
+  const [txHash, setTxHash] = useState("");
+  const [txComplete, setTxComplete] = useState(false)
+  const [values, setValues] = useState(defaultValues);
   
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  function validateForms() {
+ const validateForms = () => {
     return (
       values.lotId.length > 0 &&
       values.txType.length > 0 && 
@@ -34,6 +38,11 @@ export default function MakeTransaction(){
       values.product.length > 0 && 
       values.quantity.length > 0 
     )}
+  
+    const clearForms = () => {
+      setValues(defaultValues)
+    }
+
   
   const submitTransaction = async () => {    
     setLoading(true);
@@ -81,10 +90,7 @@ export default function MakeTransaction(){
                   </Typography>
               </Paper>
             </Grid>
-              <Grid item xs={3}>
-                <LoadingButton variant="contained" disabled={!validateForms()} loading={loading} onClick={submitTransaction} endIcon={<SendIcon />} loadingPosition="end" sx={{width:'25ch'}} >Submit</LoadingButton>
-              </Grid>
-              <Grid item xs={3}>
+            <Grid item xs={3}>
                 <Typography sx={{marginLeft:"5px", marginBottom: "5px", fontSize:"large"}}>
                   WoC Transaction Link
                 </Typography>
@@ -92,6 +98,10 @@ export default function MakeTransaction(){
                   {txComplete ? <Link href={"https://test.whatsonchain.com/tx/"+txHash} target="_blank" rel="noreferrer">{txHash}</Link> : "-"}
                 </Paper>
             </Grid>
+              <Grid item xs={3}>
+                <LoadingButton variant="contained" disabled={!validateForms()} loading={loading} onClick={submitTransaction} endIcon={<SendIcon />} loadingPosition="end" sx={{width:'25ch'}} >Submit</LoadingButton>
+                <Button variant="outlined" onClick={() => clearForms()} endIcon={<DeleteIcon/>} sx={{marginLeft:2,width:'13ch'}} >Clear</Button>
+              </Grid>
           </Grid>
         </Grid>
       </Grid>
